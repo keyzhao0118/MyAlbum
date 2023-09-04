@@ -15,7 +15,8 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 	PreviewScene w(dbMgr);
-	w.setWindowFlags(Qt::FramelessWindowHint);
+	w.setWindowFlags(Qt::CustomizeWindowHint);
+	
 	w.show();
 	return a.exec();
 }
