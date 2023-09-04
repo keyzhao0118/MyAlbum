@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/PreviewScene">
+        <file>image/窗口背景.png</file>
+        <file>image/logo.svg</file>
+        <file>image/按钮-关闭.svg</file>
+        <file>image/按钮-关闭-selected.svg</file>
+        <file>image/按钮-恢复.svg</file>
+        <file>image/按钮-设置.svg</file>
+        <file>image/按钮-最大化.svg</file>
+        <file>image/按钮-最小化.svg</file>
+    </qresource>
+</RCC>
