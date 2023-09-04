@@ -23,52 +23,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="previewscene.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-    <QtUic Include="previewscene.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtMoc Include="previewscene.h">
+    <ClInclude Include="databasemanager_global.h">
       <Filter>Header Files</Filter>
-    </QtMoc>
-    <ClCompile Include="previewscene.cpp">
+    </ClInclude>
+    <ClCompile Include="databasemanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="customtitle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="closebutton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="albumoptionbar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="databasemanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="singledatabasemanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="customtitle.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="closebutton.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="albumoptionbar.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <QtUic Include="customtitle.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
+    <ClCompile Include="singledatabasemanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

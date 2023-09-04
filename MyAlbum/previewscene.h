@@ -2,14 +2,15 @@
 
 #include <QtWidgets/QWidget>
 #include "ui_previewscene.h"
-#include "databasemanager.h"
 
 class PreviewScene : public QWidget
 {
 	Q_OBJECT
 
 public:
-	PreviewScene(DatabaseManager& dbMgr ,QWidget *parent = nullptr);
+	typedef bool (*OpenDatabaseFunc)(const QString&);
+	typedef bool (*AddAlbumFunc)(const QString&);
+	PreviewScene(QWidget *parent = nullptr);
 	~PreviewScene();
 
 private slots:
@@ -20,5 +21,7 @@ private:
 	Ui::PreviewSceneClass ui;
 	QRect m_rect;
 
-	DatabaseManager& m_dbMgr;
+	bool loadLibrary();
+	OpenDatabaseFunc m_openDatabaseFunc;
+	AddAlbumFunc m_addAlbumFunc;
 };

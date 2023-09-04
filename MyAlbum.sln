@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.33927.289
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyAlbum", "MyAlbum\MyAlbum.vcxproj", "{BE4DC44D-F4BD-4A29-B3A0-D8C08B8F1E0B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DatabaseManager", "DatabaseManager\DatabaseManager.vcxproj", "{28E4D62D-0B92-4711-A2B0-2A5FF3E773D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -15,6 +17,10 @@ Global
 		{BE4DC44D-F4BD-4A29-B3A0-D8C08B8F1E0B}.Debug|x64.Build.0 = Debug|x64
 		{BE4DC44D-F4BD-4A29-B3A0-D8C08B8F1E0B}.Release|x64.ActiveCfg = Release|x64
 		{BE4DC44D-F4BD-4A29-B3A0-D8C08B8F1E0B}.Release|x64.Build.0 = Release|x64
+		{28E4D62D-0B92-4711-A2B0-2A5FF3E773D2}.Debug|x64.ActiveCfg = Debug|x64
+		{28E4D62D-0B92-4711-A2B0-2A5FF3E773D2}.Debug|x64.Build.0 = Debug|x64
+		{28E4D62D-0B92-4711-A2B0-2A5FF3E773D2}.Release|x64.ActiveCfg = Release|x64
+		{28E4D62D-0B92-4711-A2B0-2A5FF3E773D2}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
