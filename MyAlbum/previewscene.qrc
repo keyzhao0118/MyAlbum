@@ -8,5 +8,6 @@
         <file>image/按钮-设置.svg</file>
         <file>image/按钮-最大化.svg</file>
         <file>image/按钮-最小化.svg</file>
+        <file>image/编辑相册名字.svg</file>
     </qresource>
 </RCC>

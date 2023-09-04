@@ -5,7 +5,8 @@ AlbumOptionBar::AlbumOptionBar(QWidget *parent)
 	: QWidget(parent)
 {
 	m_albumNameLab = new QLabel("默认相册", this);
-	m_setAlbumNameBtn = new QPushButton("设置相册名称", this);
+	m_setAlbumNameBtn = new QPushButton(this);
+	m_setAlbumNameBtn->setIcon(QIcon(":/PreviewScene/image/编辑相册名字.svg"));
 	m_setAlbumCoverBtn = new QPushButton("设置相册封面",this);
 	QHBoxLayout* hboxLayout = new QHBoxLayout(this);
 	hboxLayout->addWidget(m_albumNameLab);
