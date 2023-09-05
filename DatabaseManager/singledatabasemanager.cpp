@@ -19,12 +19,15 @@ bool DatabaseManager::openDatabase(const QString& databaseFilePath)
 		if (!databaseFile.open(QIODevice::WriteOnly))
 			return false;
 		databaseFile.close();
+		if (!m_database.open())
+			return false;
 
 		QString createAlbumsTable = "CREATE TABLE IF NOT EXISTS Albums ("
 			"ID INTEGER PRIMARY KEY,"
 			"Name TEXT,"
 			"CoverID INTEGER,"
 			"LastAccessed DATETIME,"
+			"CreatedAt DATATIME,"
 			"FOREIGN KEY(CoverID) REFERENCES Images(ID)"
 			");";
 
@@ -43,13 +46,27 @@ bool DatabaseManager::openDatabase(const QString& databaseFilePath)
 		QSqlQuery query;
 		if (!query.exec(createAlbumsTable) || !query.exec(createImagesTable))
 			return false;
+
+		//ToDo添加默认照片和默认相册
+
+		return true;
 	}
 	if (!m_database.open())
 		return false;
 	return true;
 }
 
+void DatabaseManager::closeDatabase()
+{
+	m_database.close();
+}
+
 bool DatabaseManager::addAlbum(const QString& name)
+{
+	return false;
+}
+
+bool DatabaseManager::addImage(const QString& path)
 {
 	return false;
 }
