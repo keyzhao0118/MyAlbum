@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1276</width>
+    <height>896</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -62,8 +62,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>798</width>
-        <height>273</height>
+        <width>1274</width>
+        <height>773</height>
        </rect>
       </property>
      </widget>
@@ -71,6 +71,12 @@
    </item>
    <item>
     <widget class="QScrollArea" name="albumArea">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="verticalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
@@ -82,8 +88,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>798</width>
-        <height>273</height>
+        <width>1274</width>
+        <height>69</height>
        </rect>
       </property>
      </widget>
