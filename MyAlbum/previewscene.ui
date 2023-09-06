@@ -13,7 +13,10 @@
   <property name="windowTitle">
    <string>PreviewScene</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="_3">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMinimumSize</enum>
+   </property>
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -30,10 +33,92 @@
     <widget class="CustomTitle" name="customTitle" native="true"/>
    </item>
    <item>
-    <widget class="QWidget" name="imageArea" native="true"/>
+    <widget class="QWidget" name="imageWidget" native="true">
+     <layout class="QVBoxLayout" name="_2">
+      <property name="spacing">
+       <number>3</number>
+      </property>
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="ImageOptionBar" name="imageOptionBar" native="true"/>
+      </item>
+      <item>
+       <widget class="ImageScrollArea" name="imagescrollArea">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="widget_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>1268</width>
+           <height>740</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
-    <widget class="QWidget" name="albumArea" native="true"/>
+    <widget class="QWidget" name="albumWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <layout class="QVBoxLayout">
+      <property name="spacing">
+       <number>3</number>
+      </property>
+      <property name="leftMargin">
+       <number>3</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>3</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="AlbumOptionBar" name="albumOptionBar" native="true"/>
+      </item>
+      <item>
+       <widget class="AlbumScrollArea" name="albumscrollArea">
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="widget">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>1268</width>
+           <height>69</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -43,6 +128,30 @@
    <class>CustomTitle</class>
    <extends>QWidget</extends>
    <header>customtitle.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AlbumOptionBar</class>
+   <extends>QWidget</extends>
+   <header>albumoptionbar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AlbumScrollArea</class>
+   <extends>QScrollArea</extends>
+   <header>albumscrollarea.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ImageOptionBar</class>
+   <extends>QWidget</extends>
+   <header>imageoptionbar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ImageScrollArea</class>
+   <extends>QScrollArea</extends>
+   <header>imagescrollarea.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

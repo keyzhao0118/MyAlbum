@@ -46,7 +46,16 @@
     <ClCompile Include="closebutton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="imageoptionbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="albumoptionbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="albumscrollarea.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imagescrollarea.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,7 +71,16 @@
     <QtMoc Include="closebutton.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="imageoptionbar.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <QtMoc Include="albumoptionbar.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="albumscrollarea.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="imagescrollarea.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

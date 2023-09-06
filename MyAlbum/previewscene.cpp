@@ -28,8 +28,8 @@ PreviewScene::PreviewScene(QWidget* parent)
 	//ToDo：从Albums表查询最近访问的Album的ID，查询所有属于该Album的Images，展示这些Images
 
 	//ToDo：查询结果传给另外一个线程，由专门的线程更新图片预览界面和相册预览界面
-
-	//每次新建相册、
+	
+	
 }
 
 PreviewScene::~PreviewScene()
