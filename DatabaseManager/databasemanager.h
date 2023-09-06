@@ -5,6 +5,6 @@
 extern "C" {
 	bool DATABASEMANAGER_EXPORT OpenDatabase(const QString& databaseFilePath);
 	void DATABASEMANAGER_EXPORT CloseDatabase();
-	bool DATABASEMANAGER_EXPORT AddAlbum(const QString& name);
-	bool DATABASEMANAGER_EXPORT AddImage(const QString& path);
+	int DATABASEMANAGER_EXPORT AddAlbum(const QString& name);
+	int DATABASEMANAGER_EXPORT AddImage(int albumID, const QString& path);
 }

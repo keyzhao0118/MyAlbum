@@ -9,7 +9,9 @@ class PreviewScene : public QWidget
 
 public:
 	typedef bool (*OpenDatabaseFunc)(const QString&);
-	typedef bool (*AddAlbumFunc)(const QString&);
+	typedef void (*CloseDatabaseFunc)();
+	typedef int (*AddAlbumFunc)(const QString&);
+	typedef int (*AddImageFunc)(int, const QString&);
 	PreviewScene(QWidget *parent = nullptr);
 	~PreviewScene();
 
@@ -23,5 +25,7 @@ private:
 
 	bool loadLibrary();
 	OpenDatabaseFunc m_openDatabaseFunc;
+	CloseDatabaseFunc m_closeDatabaseFunc;
 	AddAlbumFunc m_addAlbumFunc;
+	AddImageFunc m_addImageFunc;
 };

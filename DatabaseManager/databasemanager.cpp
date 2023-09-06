@@ -11,12 +11,12 @@ void CloseDatabase()
 	DatabaseManager::getInstance()->closeDatabase();
 }
 
-bool AddAlbum(const QString& name)
+int AddAlbum(const QString& name)
 {
 	return DatabaseManager::getInstance()->addAlbum(name);
 }
 
-bool AddImage(const QString& path)
+int AddImage(int albumID, const QString& path)
 {
-	return DatabaseManager::getInstance()->addImage(path);
+	return DatabaseManager::getInstance()->addImage(albumID, path);
 }
