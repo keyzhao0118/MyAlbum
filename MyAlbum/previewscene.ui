@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1276</width>
-    <height>896</height>
+    <height>873</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,70 +30,10 @@
     <widget class="CustomTitle" name="customTitle" native="true"/>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="AlbumOptionBar" name="albumInfoBar" native="true"/>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
+    <widget class="QWidget" name="imageArea" native="true"/>
    </item>
    <item>
-    <widget class="QScrollArea" name="previewArea">
-     <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>1274</width>
-        <height>773</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item>
-    <widget class="QScrollArea" name="albumArea">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="verticalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents_2">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>1274</width>
-        <height>69</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
+    <widget class="QWidget" name="albumArea" native="true"/>
    </item>
   </layout>
  </widget>
@@ -103,12 +43,6 @@
    <class>CustomTitle</class>
    <extends>QWidget</extends>
    <header>customtitle.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>AlbumOptionBar</class>
-   <extends>QWidget</extends>
-   <header>albumoptionbar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
