@@ -88,12 +88,12 @@
     <QtUic Include="customtitle.ui" />
     <QtUic Include="previewscene.ui" />
     <QtMoc Include="previewscene.h" />
-    <ClCompile Include="albumscrollarea.cpp" />
+    <ClCompile Include="albumscrollwidget.cpp" />
     <ClCompile Include="imageoptionbar.cpp" />
     <ClCompile Include="closebutton.cpp" />
     <ClCompile Include="albumoptionbar.cpp" />
     <ClCompile Include="customtitle.cpp" />
-    <ClCompile Include="imagescrollarea.cpp" />
+    <ClCompile Include="imagescrollwidget.cpp" />
     <ClCompile Include="previewscene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -102,8 +102,8 @@
     <QtMoc Include="closebutton.h" />
     <QtMoc Include="imageoptionbar.h" />
     <QtMoc Include="albumoptionbar.h" />
-    <QtMoc Include="albumscrollarea.h" />
-    <QtMoc Include="imagescrollarea.h" />
+    <QtMoc Include="albumscrollwidget.h" />
+    <QtMoc Include="imagescrollwidget.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

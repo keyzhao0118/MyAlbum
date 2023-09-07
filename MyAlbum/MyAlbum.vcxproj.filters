@@ -52,10 +52,10 @@
     <ClCompile Include="albumoptionbar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="albumscrollarea.cpp">
+    <ClCompile Include="albumscrollwidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="imagescrollarea.cpp">
+    <ClCompile Include="imagescrollwidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,10 +77,10 @@
     <QtMoc Include="albumoptionbar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="albumscrollarea.h">
+    <QtMoc Include="albumscrollwidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="imagescrollarea.h">
+    <QtMoc Include="imagescrollwidget.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
