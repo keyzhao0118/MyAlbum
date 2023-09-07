@@ -63,9 +63,13 @@ bool PreviewScene::loadLibrary()
 	{
 		m_openDatabaseFunc = (OpenDatabaseFunc)myLibrary.resolve("OpenDatabase");
 		m_closeDatabaseFunc = (CloseDatabaseFunc)myLibrary.resolve("CloseDatabase");
-		m_addAlbumFunc = (AddAlbumFunc)myLibrary.resolve("AddAlbum");
-		m_addImageFunc = (AddImageFunc)myLibrary.resolve("AddImage");
-		return m_openDatabaseFunc && m_closeDatabaseFunc && m_addAlbumFunc && m_addImageFunc;
+		m_insertAlbumFunc = (InsertAlbumFunc)myLibrary.resolve("InsertAlbum");
+		m_insertImageFunc = (InsertImageFunc)myLibrary.resolve("InsertImage");
+		m_deleteAlbumFunc = (DeleteAlbumFunc)myLibrary.resolve("DeleteAlbum");
+		m_deleteImageFunc = (DeleteImageFunc)myLibrary.resolve("DeleteImage");
+		return m_openDatabaseFunc && m_closeDatabaseFunc &&
+			m_insertAlbumFunc && m_insertImageFunc &&
+			m_deleteAlbumFunc && m_deleteImageFunc;
 	}
 	return false;
 }

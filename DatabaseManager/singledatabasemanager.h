@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <QSqlDatabase>
+#include <QDateTime>
 
 class DatabaseManager
 {
@@ -8,8 +9,17 @@ public:
     static DatabaseManager* getInstance();
     bool openDatabase(const QString& databaseFilePath);
     void closeDatabase();
-    int addAlbum(const QString& name);
-    int addImage(int albumID, const QString& path);
+
+    int insertAlbum(const QString& name, const QDateTime& lastAccessed, const QDateTime& createdAt);
+    int insertImage(int albumID, const QString& path, const QString& type, int size,
+        const QString& resolution, const QDateTime& importedAt);
+    
+    bool deleteAlbum(int albumID);
+    bool deleteImage(int imageID);
+
+    int selectLastAccessedAlbumID();
+    QSqlQuery selectImagesWithAlbumID(int albumID, int orderType);
+    QSqlQuery selectAllAlbums();
 
 private:
     DatabaseManager();

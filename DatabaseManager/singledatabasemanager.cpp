@@ -6,7 +6,7 @@
 namespace 
 {
 
-QString createAlbumsTable = "CREATE TABLE IF NOT EXISTS Albums ("
+QString createAlbumsTableSQL = "CREATE TABLE IF NOT EXISTS Albums ("
 	"ID INTEGER PRIMARY KEY,"
 	"Name TEXT UNIQUE,"
 	"CoverID INTEGER NULL,"
@@ -15,23 +15,27 @@ QString createAlbumsTable = "CREATE TABLE IF NOT EXISTS Albums ("
 	"FOREIGN KEY(CoverID) REFERENCES Images(ID)"
 	");";
 
-QString createImagesTable = "CREATE TABLE IF NOT EXISTS Images ("
+QString createImagesTableSQL = "CREATE TABLE IF NOT EXISTS Images ("
 	"ID INTEGER PRIMARY KEY,"
 	"AlbumID INTEGER,"
-	"Path TEXT UNIQUE,"
-	"Type TEXT NULL,"
-	"Size INTEGER NULL,"
-	"Resolution TEXT NULL,"
+	"Path TEXT,"
+	"Type TEXT,"
+	"Size INTEGER,"
+	"Resolution TEXT,"
 	"LastAccessed DATETIME NULL,"
 	"ImportedAt DATETIME,"
-	"FOREIGN KEY(AlbumID) REFERENCES Albums(ID)"
+	"FOREIGN KEY(AlbumID) REFERENCES Albums(ID) ON DELETE CASCADE"
 	");";
 
-QString insertAlbum = "INSERT INTO Albums (Name, LastAccessed, CreatedAt) "
-"VALUES (:name, :lastAccessed, :createdAt)";
+QString insertAlbumSQL = "INSERT INTO Albums (Name, LastAccessed, CreatedAt) "
+	"VALUES (:name, :lastAccessed, :createdAt)";
 
-QString insertImage = "INSERT INTO Images (AlbumID, Path, Type, Size, Resolution, LastAccessed, ImportedAt) "
-"VALUES (:albumID, :path, :type, :size, :resolution, :lastAccessed, :importedAt)";
+QString insertImageSQL = "INSERT INTO Images (AlbumID, Path, Type, Size, Resolution, LastAccessed, ImportedAt) "
+	"VALUES (:albumID, :path, :type, :size, :resolution, :lastAccessed, :importedAt)";
+
+QString deleteAlbumSQL = "DELETE FROM Albums WHERE ID = :albumID";
+
+QString deleteImageSQL = "DELETE FROM Images WHERE ID = :imageID";
 
 }
 
@@ -57,15 +61,16 @@ bool DatabaseManager::openDatabase(const QString& databaseFilePath)
 		if (!m_database.open())
 			return false;
 		QSqlQuery query;
-		if (!query.exec(createAlbumsTable) || !query.exec(createImagesTable))
+		if (!query.exec(createAlbumsTableSQL) || !query.exec(createImagesTableSQL))
 			return false;
 		//添加默认相册和图片
-		int albumID = addAlbum("示例相册");
+		QDateTime curDateTime = QDateTime::currentDateTime();
+		int albumID = insertAlbum("示例相册", curDateTime, curDateTime);
 		if (0 == albumID)
 			return false;
-		return addImage(albumID, ":/PreviewScene/image/示例图片/11月的萧邦_周杰伦.png") &&
-			addImage(albumID, ":/PreviewScene/image/示例图片/八度空间_周杰伦.png") &&
-			addImage(albumID, ":/PreviewScene/image/示例图片/范特西_周杰伦.png");
+		return insertImage(albumID, ":/PreviewScene/image/示例图片/11月的萧邦_周杰伦.png", "PNG", 0, "", curDateTime) &&
+			insertImage(albumID, ":/PreviewScene/image/示例图片/八度空间_周杰伦.png", "PNG", 0, "", curDateTime) &&
+			insertImage(albumID, ":/PreviewScene/image/示例图片/范特西_周杰伦.png", "PNG", 0, "", curDateTime);
 
 	}
 	//已经存在数据库文件，直接打开
@@ -77,38 +82,84 @@ void DatabaseManager::closeDatabase()
 	m_database.close();
 }
 
-int DatabaseManager::addAlbum(const QString& name)
+int DatabaseManager::insertAlbum(const QString& name, const QDateTime& lastAccessed, 
+	const QDateTime& createdAt)
 {
 	QSqlQuery query;
-	query.prepare(insertAlbum);
-	query.bindValue(":name", "示例相册");
-	query.bindValue(":lastAccessed", QDateTime::currentDateTime());
-	query.bindValue(":createdAt", QDateTime::currentDateTime());
+	query.prepare(insertAlbumSQL);
+	query.bindValue(":name", name);
+	query.bindValue(":lastAccessed", lastAccessed);
+	query.bindValue(":createdAt", createdAt);
 	if (!query.exec())
 		return 0;
-	query.clear();
-	query.prepare("SELECT ID FROM Albums WHERE Name = :name");
-	query.bindValue(":name", name);
-	if (!query.exec() || !query.next())
-		return 0;
-	return query.value("ID").toInt();
+	return query.lastInsertId().toInt();
 }
 
-int DatabaseManager::addImage(int albumID, const QString& path)
+int DatabaseManager::insertImage(int albumID, const QString& path, const QString& type, int size,
+	const QString& resolution, const QDateTime& importedAt)
 {
 	QSqlQuery query;
-	query.prepare(insertImage);
+	query.prepare(insertImageSQL);
 	query.bindValue(":albumID", albumID);
 	query.bindValue(":path", path);
-	query.bindValue(":importedAt", QDateTime::currentDateTime());
+	query.bindValue(":type", type);
+	query.bindValue(":size", size);
+	query.bindValue(":resolution", resolution);
+	query.bindValue(":importedAt", importedAt);
 	if (!query.exec())
 		return 0;
-	query.clear();
-	query.prepare("SELECT ID FROM Images WHERE Path = :path");
-	query.bindValue(":path", path);
-	if (!query.exec() || !query.next())
+	return query.lastInsertId().toInt();
+}
+
+bool DatabaseManager::deleteAlbum(int albumID)
+{
+	QSqlQuery query;
+	query.prepare(deleteAlbumSQL);
+	query.bindValue(":albumID", albumID);
+	return query.exec();
+}
+
+bool DatabaseManager::deleteImage(int imageID)
+{
+	QSqlQuery query;
+	query.prepare(deleteImageSQL);
+	query.bindValue(":imageID", imageID);
+	return query.exec();
+}
+
+int DatabaseManager::selectLastAccessedAlbumID()
+{
+	QSqlQuery query;
+	if (!query.exec("SELECT ID FROM Albums ORDER BY lastAccessed DESC LIMIT 1") ||
+		!query.next())
 		return 0;
 	return query.value("ID").toInt();
+
+}
+
+QSqlQuery DatabaseManager::selectImagesWithAlbumID(int albumID, int orderType)
+{
+	QSqlQuery query;
+	query.prepare("SELECT * FROM Images ORDER BY :orderType");
+	switch (orderType)
+	{
+	case 0:
+		query.bindValue(":orderType", "LastAccessed");
+		break;
+	case 1:
+		query.bindValue(":orderType", "CreatedAt");
+		break;
+	default:
+		query.bindValue(":orderType", "ID");
+	}
+	query.exec();
+	return query;
+}
+
+QSqlQuery DatabaseManager::selectAllAlbums()
+{
+	QSqlQuery query;
+	return query;
 }
 
 DatabaseManager::DatabaseManager()

@@ -10,8 +10,12 @@ class PreviewScene : public QWidget
 public:
 	typedef bool (*OpenDatabaseFunc)(const QString&);
 	typedef void (*CloseDatabaseFunc)();
-	typedef int (*AddAlbumFunc)(const QString&);
-	typedef int (*AddImageFunc)(int, const QString&);
+	typedef int (*InsertAlbumFunc)(const QString& name, const QDateTime& lastAccessed, const QDateTime& createdAt);
+	typedef int (*InsertImageFunc)(int albumID, const QString& path, const QString& type, int size,
+		const QString& resolution, const QDateTime& importedAt);
+	typedef bool (*DeleteAlbumFunc)(int albumID);
+	typedef bool (*DeleteImageFunc)(int imageID);
+
 	PreviewScene(QWidget *parent = nullptr);
 	~PreviewScene();
 
@@ -26,6 +30,8 @@ private:
 	bool loadLibrary();
 	OpenDatabaseFunc m_openDatabaseFunc;
 	CloseDatabaseFunc m_closeDatabaseFunc;
-	AddAlbumFunc m_addAlbumFunc;
-	AddImageFunc m_addImageFunc;
+	InsertAlbumFunc m_insertAlbumFunc;
+	InsertImageFunc m_insertImageFunc;
+	DeleteAlbumFunc m_deleteAlbumFunc;
+	DeleteImageFunc m_deleteImageFunc;
 };

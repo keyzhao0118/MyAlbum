@@ -11,12 +11,38 @@ void CloseDatabase()
 	DatabaseManager::getInstance()->closeDatabase();
 }
 
-int AddAlbum(const QString& name)
+int InsertAlbum(const QString& name, const QDateTime& lastAccessed, const QDateTime& createdAt)
 {
-	return DatabaseManager::getInstance()->addAlbum(name);
+	return DatabaseManager::getInstance()->insertAlbum(name, lastAccessed, createdAt);
 }
 
-int AddImage(int albumID, const QString& path)
+int InsertImage(int albumID, const QString& path, const QString& type, int size,
+	const QString& resolution, const QDateTime& importedAt)
 {
-	return DatabaseManager::getInstance()->addImage(albumID, path);
+	return DatabaseManager::getInstance()->insertImage(albumID, path, type, size, resolution, importedAt);
+}
+
+bool DeleteAlbum(int albumID)
+{
+	return DatabaseManager::getInstance()->deleteAlbum(albumID);
+}
+
+bool DeleteImage(int imageID)
+{
+	return DatabaseManager::getInstance()->deleteImage(imageID);
+}
+
+int SelectLastAccessedAlbumID()
+{
+	return DatabaseManager::getInstance()->selectLastAccessedAlbumID();
+}
+
+QSqlQuery SelectImagesWithAlbumID(int albumID, int orderType)
+{
+	return DatabaseManager::getInstance()->selectImagesWithAlbumID(albumID, orderType);
+}
+
+QSqlQuery SelectAllAlbums()
+{
+	return DatabaseManager::getInstance()->selectAllAlbums();
 }
