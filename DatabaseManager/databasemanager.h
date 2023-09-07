@@ -15,8 +15,8 @@ extern "C" {
 	DATABASEMANAGER_EXPORT bool DeleteAlbum(int albumID);
 	DATABASEMANAGER_EXPORT bool DeleteImage(int imageID);
 
-	DATABASEMANAGER_EXPORT int SelectLastAccessedAlbumID();
+	DATABASEMANAGER_EXPORT int SelectLastAccessedAlbumID();//不需要
 	DATABASEMANAGER_EXPORT QSqlQuery SelectImagesWithAlbumID(int albumID, int orderType);
-	DATABASEMANAGER_EXPORT QSqlQuery SelectAllAlbums();
+	DATABASEMANAGER_EXPORT QSqlQuery SelectAllAlbums(int orderType);
 
 }

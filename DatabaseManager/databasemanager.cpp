@@ -42,7 +42,7 @@ QSqlQuery SelectImagesWithAlbumID(int albumID, int orderType)
 	return DatabaseManager::getInstance()->selectImagesWithAlbumID(albumID, orderType);
 }
 
-QSqlQuery SelectAllAlbums()
+QSqlQuery SelectAllAlbums(int orderType)
 {
-	return DatabaseManager::getInstance()->selectAllAlbums();
+	return DatabaseManager::getInstance()->selectAllAlbums(orderType);
 }

@@ -19,7 +19,7 @@ public:
 
     int selectLastAccessedAlbumID();
     QSqlQuery selectImagesWithAlbumID(int albumID, int orderType);
-    QSqlQuery selectAllAlbums();
+    QSqlQuery selectAllAlbums(int orderType);
 
 private:
     DatabaseManager();

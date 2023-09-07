@@ -147,7 +147,7 @@ QSqlQuery DatabaseManager::selectImagesWithAlbumID(int albumID, int orderType)
 		query.bindValue(":orderType", "LastAccessed");
 		break;
 	case 1:
-		query.bindValue(":orderType", "CreatedAt");
+		query.bindValue(":orderType", "ImportedAt");
 		break;
 	default:
 		query.bindValue(":orderType", "ID");
@@ -156,9 +156,22 @@ QSqlQuery DatabaseManager::selectImagesWithAlbumID(int albumID, int orderType)
 	return query;
 }
 
-QSqlQuery DatabaseManager::selectAllAlbums()
+QSqlQuery DatabaseManager::selectAllAlbums(int orderType)
 {
 	QSqlQuery query;
+	query.prepare("SELECT * FROM Albums ORDER BY :orderType");
+	switch (orderType)
+	{
+	case 0:
+		query.bindValue(":orderType", "LastAccessed");
+		break;
+	case 1:
+		query.bindValue(":orderType", "CreatedAt");
+		break;
+	default:
+		query.bindValue(":orderType", "ID");
+	}
+	query.exec();
 	return query;
 }
 
