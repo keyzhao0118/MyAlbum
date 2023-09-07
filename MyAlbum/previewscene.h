@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QWidget>
 #include "ui_previewscene.h"
+#include <QSqlQuery>
 
 class PreviewScene : public QWidget
 {
@@ -10,11 +11,14 @@ class PreviewScene : public QWidget
 public:
 	typedef bool (*OpenDatabaseFunc)(const QString&);
 	typedef void (*CloseDatabaseFunc)();
-	typedef int (*InsertAlbumFunc)(const QString& name, const QDateTime& lastAccessed, const QDateTime& createdAt);
-	typedef int (*InsertImageFunc)(int albumID, const QString& path, const QString& type, int size,
-		const QString& resolution, const QDateTime& importedAt);
-	typedef bool (*DeleteAlbumFunc)(int albumID);
-	typedef bool (*DeleteImageFunc)(int imageID);
+	typedef int (*InsertAlbumFunc)(const QString&, const QDateTime&, const QDateTime&);
+	typedef int (*InsertImageFunc)(int, const QString&, const QString&, int,
+		const QString&, const QDateTime&);
+	typedef bool (*DeleteAlbumFunc)(int);
+	typedef bool (*DeleteImageFunc)(int);
+	typedef int (*SelectLastAccessedAlbumIDFunc)();
+	typedef QSqlQuery (*SelectImagesWithAlbumIDFunc)(int, int);
+	typedef QSqlQuery (*SelectAllAlbumsFunc)(int);
 
 	PreviewScene(QWidget *parent = nullptr);
 	~PreviewScene();
@@ -22,6 +26,8 @@ public:
 private slots:
 	void onSettingsBtnClicked();
 	void onMaxBtnClicked(bool isMax);
+	void refreshImageScrollWidget(QSqlQuery& query);
+	void refreshAlbumScrollWidget(QSqlQuery& query);
 
 private:
 	Ui::PreviewSceneClass ui;
@@ -34,4 +40,7 @@ private:
 	InsertImageFunc m_insertImageFunc;
 	DeleteAlbumFunc m_deleteAlbumFunc;
 	DeleteImageFunc m_deleteImageFunc;
+	SelectLastAccessedAlbumIDFunc m_selectLastAccessedAlbumIDFunc;
+	SelectImagesWithAlbumIDFunc m_selectImagesWithAlbumIDFunc;
+	SelectAllAlbumsFunc m_selectAllAlbumsFunc;
 };
