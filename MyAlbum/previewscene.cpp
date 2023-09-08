@@ -2,16 +2,24 @@
 #include <QDir>
 #include <QLibrary>
 #include <QMessageBox>
-#include <QImageReader>
 
 PreviewScene::PreviewScene(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
+	ui.albumscrollArea->setFixedHeight(150);
+
+	//自定义标题栏上的信号处理
 	connect(ui.customTitle, SIGNAL(settingsBtnClicked()), this, SLOT(onSettingsBtnClicked()));
 	connect(ui.customTitle, SIGNAL(minBtnClicked()), this, SLOT(showMinimized()));
 	connect(ui.customTitle, SIGNAL(maxBtnClicked(bool)), this, SLOT(onMaxBtnClicked(bool)));
 	connect(ui.customTitle, SIGNAL(closeBtnClicked()), this, SLOT(close()));
+
+	//ToDo：图片选项卡上的信号处理
+	
+	//ToDo：图片显示窗口的信号处理
+
+	//ToDo
 
 	if (!loadLibrary())
 	{
@@ -26,11 +34,11 @@ PreviewScene::PreviewScene(QWidget* parent)
 	}
 
 	QSqlQuery albumQuery = m_selectAllAlbumsFunc(0);//默认排序类型应该通过配置中心管理
-	refreshAlbumScrollWidget(albumQuery);
+	ui.albumScrollWidget->refresh(albumQuery);
 
 	int albumID = m_selectLastAccessedAlbumIDFunc();
 	QSqlQuery imageQuery = m_selectImagesWithAlbumIDFunc(albumID, 0);
-	refreshImageScrollWidget(imageQuery);
+	ui.imageScrollWidget->refresh(imageQuery);
 }
 
 PreviewScene::~PreviewScene()
@@ -53,28 +61,6 @@ void PreviewScene::onMaxBtnClicked(bool isMax)
 		m_rect = geometry();
 		showMaximized();
 	}
-}
-
-void PreviewScene::refreshImageScrollWidget(QSqlQuery& query)
-{
-	QVBoxLayout* vLayout = new QVBoxLayout;
-	while (query.next())
-	{
-		QImageReader reader(query.value("Path").toString());
-		QSize originalSize = reader.size();
-		QSize newSize = originalSize.scaled(300, 300, Qt::KeepAspectRatio);
-		reader.setScaledSize(newSize);
-
-		QLabel* lab = new QLabel;
-		lab->setPixmap(QPixmap::fromImageReader(&reader));
-		vLayout->addWidget(lab);
-	}
-	ui.imageScrollWidget->setLayout(vLayout);
-}
-
-void PreviewScene::refreshAlbumScrollWidget(QSqlQuery& query)
-{
-	
 }
 
 bool PreviewScene::loadLibrary()

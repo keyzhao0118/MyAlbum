@@ -1,7 +1,8 @@
 ﻿#include "imagescrollwidget.h"
-#include <QLabel>
+#include <QSqlQuery>
 #include <QImageReader>
-#include <QHboxLayout>
+#include <QVBoxLayout>
+#include "customimage.h"
 
 ImageScrollWidget::ImageScrollWidget(QWidget *parent)
 	: QWidget(parent)
@@ -12,4 +13,22 @@ ImageScrollWidget::ImageScrollWidget(QWidget *parent)
 ImageScrollWidget::~ImageScrollWidget()
 {
 
+}
+
+void ImageScrollWidget::refresh(QSqlQuery& query)
+{
+	QVBoxLayout* vLayout = new QVBoxLayout;
+	while (query.next())
+	{
+		//ToDo：由缓存管理模块提供指定视图的缩略图
+		QImageReader imageReader(query.value("Path").toString());
+		QSize originalSize = imageReader.size();
+		QSize newSize = originalSize.scaled(QSize(100, 100), Qt::KeepAspectRatio);
+		imageReader.setScaledSize(newSize);
+
+		CustomImage* customImage = new CustomImage(ViewSize::Small,
+			QPixmap::fromImageReader(&imageReader), this);
+		vLayout->addWidget(customImage);
+	}
+	setLayout(vLayout);
 }

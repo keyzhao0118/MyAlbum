@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33927.289
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyAlbum", "MyAlbum\MyAlbum.vcxproj", "{BE4DC44D-F4BD-4A29-B3A0-D8C08B8F1E0B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DatabaseManager", "DatabaseManager\DatabaseManager.vcxproj", "{28E4D62D-0B92-4711-A2B0-2A5FF3E773D2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CacheManager", "CacheManager\CacheManager.vcxproj", "{75466FCA-C4E6-4850-BBCA-7CCA47EF1C51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{28E4D62D-0B92-4711-A2B0-2A5FF3E773D2}.Debug|x64.Build.0 = Debug|x64
 		{28E4D62D-0B92-4711-A2B0-2A5FF3E773D2}.Release|x64.ActiveCfg = Release|x64
 		{28E4D62D-0B92-4711-A2B0-2A5FF3E773D2}.Release|x64.Build.0 = Release|x64
+		{75466FCA-C4E6-4850-BBCA-7CCA47EF1C51}.Debug|x64.ActiveCfg = Debug|x64
+		{75466FCA-C4E6-4850-BBCA-7CCA47EF1C51}.Debug|x64.Build.0 = Debug|x64
+		{75466FCA-C4E6-4850-BBCA-7CCA47EF1C51}.Release|x64.ActiveCfg = Release|x64
+		{75466FCA-C4E6-4850-BBCA-7CCA47EF1C51}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

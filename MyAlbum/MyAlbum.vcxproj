@@ -85,10 +85,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="previewscene.qrc" />
+    <QtUic Include="customimage.ui" />
     <QtUic Include="customtitle.ui" />
     <QtUic Include="previewscene.ui" />
     <QtMoc Include="previewscene.h" />
     <ClCompile Include="albumscrollwidget.cpp" />
+    <ClCompile Include="customimage.cpp" />
     <ClCompile Include="imageoptionbar.cpp" />
     <ClCompile Include="closebutton.cpp" />
     <ClCompile Include="albumoptionbar.cpp" />
@@ -104,9 +106,13 @@
     <QtMoc Include="albumoptionbar.h" />
     <QtMoc Include="albumscrollwidget.h" />
     <QtMoc Include="imagescrollwidget.h" />
+    <QtMoc Include="customimage.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CacheManager\CacheManager.vcxproj">
+      <Project>{75466fca-c4e6-4850-bbca-7cca47ef1c51}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\DatabaseManager\DatabaseManager.vcxproj">
       <Project>{28e4d62d-0b92-4711-a2b0-2a5ff3e773d2}</Project>
     </ProjectReference>

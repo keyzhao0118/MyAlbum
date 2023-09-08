@@ -26,8 +26,6 @@ public:
 private slots:
 	void onSettingsBtnClicked();
 	void onMaxBtnClicked(bool isMax);
-	void refreshImageScrollWidget(QSqlQuery& query);
-	void refreshAlbumScrollWidget(QSqlQuery& query);
 
 private:
 	Ui::PreviewSceneClass ui;

@@ -3,8 +3,13 @@
 AlbumScrollWidget::AlbumScrollWidget(QWidget *parent)
 	: QWidget(parent)
 {
-	setFixedHeight(100);
+
 }
 
 AlbumScrollWidget::~AlbumScrollWidget()
 {}
+
+void AlbumScrollWidget::refresh(QSqlQuery& query)
+{
+
+}

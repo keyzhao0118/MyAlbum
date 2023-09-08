@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include <QWidget>
+#include <QSqlQuery>
 
 class AlbumScrollWidget : public QWidget
 {
@@ -9,4 +10,7 @@ class AlbumScrollWidget : public QWidget
 public:
 	AlbumScrollWidget(QWidget* parent = nullptr);
 	~AlbumScrollWidget();
+
+public slots:
+	void refresh(QSqlQuery& query);
 };
