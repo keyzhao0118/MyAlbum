@@ -16,10 +16,11 @@ int InsertAlbum(const QString& name, const QDateTime& lastAccessed, const QDateT
 	return DatabaseManager::getInstance()->insertAlbum(name, lastAccessed, createdAt);
 }
 
-int InsertImage(int albumID, const QString& path, const QString& type, int size,
+int InsertImage(int albumID, const QString& path, const QString& format, int size,
 	const QString& resolution, const QDateTime& importedAt)
 {
-	return DatabaseManager::getInstance()->insertImage(albumID, path, type, size, resolution, importedAt);
+	return DatabaseManager::getInstance()->insertImage(
+		albumID, path, format, size, resolution, importedAt);
 }
 
 bool DeleteAlbum(int albumID)
@@ -37,12 +38,12 @@ int SelectLastAccessedAlbumID()
 	return DatabaseManager::getInstance()->selectLastAccessedAlbumID();
 }
 
-QSqlQuery SelectImagesWithAlbumID(int albumID, int orderType)
+QSqlQuery SelectImagesWithAlbumID(int albumID, int sortType)
 {
-	return DatabaseManager::getInstance()->selectImagesWithAlbumID(albumID, orderType);
+	return DatabaseManager::getInstance()->selectImagesWithAlbumID(albumID, sortType);
 }
 
-QSqlQuery SelectAllAlbums(int orderType)
+QSqlQuery SelectAllAlbums(int sortType)
 {
-	return DatabaseManager::getInstance()->selectAllAlbums(orderType);
+	return DatabaseManager::getInstance()->selectAllAlbums(sortType);
 }

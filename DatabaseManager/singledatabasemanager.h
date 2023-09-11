@@ -18,8 +18,8 @@ public:
     bool deleteImage(int imageID);
 
     int selectLastAccessedAlbumID();
-    QSqlQuery selectImagesWithAlbumID(int albumID, int orderType);
-    QSqlQuery selectAllAlbums(int orderType);
+    QSqlQuery selectImagesWithAlbumID(int albumID, int sortType);
+    QSqlQuery selectAllAlbums(int sortType);
 
 private:
     DatabaseManager();

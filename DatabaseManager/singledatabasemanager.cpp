@@ -19,7 +19,7 @@ QString createImagesTableSQL = "CREATE TABLE IF NOT EXISTS Images ("
 	"ID INTEGER PRIMARY KEY,"
 	"AlbumID INTEGER,"
 	"Path TEXT,"
-	"Type TEXT,"
+	"Format TEXT,"
 	"Size INTEGER,"
 	"Resolution TEXT,"
 	"LastAccessed DATETIME NULL,"
@@ -30,8 +30,8 @@ QString createImagesTableSQL = "CREATE TABLE IF NOT EXISTS Images ("
 QString insertAlbumSQL = "INSERT INTO Albums (Name, LastAccessed, CreatedAt) "
 	"VALUES (:name, :lastAccessed, :createdAt)";
 
-QString insertImageSQL = "INSERT INTO Images (AlbumID, Path, Type, Size, Resolution, LastAccessed, ImportedAt) "
-	"VALUES (:albumID, :path, :type, :size, :resolution, :lastAccessed, :importedAt)";
+QString insertImageSQL = "INSERT INTO Images (AlbumID, Path, Format, Size, Resolution, LastAccessed, ImportedAt) "
+	"VALUES (:albumID, :path, :format, :size, :resolution, :lastAccessed, :importedAt)";
 
 QString deleteAlbumSQL = "DELETE FROM Albums WHERE ID = :albumID";
 
@@ -95,14 +95,14 @@ int DatabaseManager::insertAlbum(const QString& name, const QDateTime& lastAcces
 	return query.lastInsertId().toInt();
 }
 
-int DatabaseManager::insertImage(int albumID, const QString& path, const QString& type, int size,
+int DatabaseManager::insertImage(int albumID, const QString& path, const QString& format, int size,
 	const QString& resolution, const QDateTime& importedAt)
 {
 	QSqlQuery query;
 	query.prepare(insertImageSQL);
 	query.bindValue(":albumID", albumID);
 	query.bindValue(":path", path);
-	query.bindValue(":type", type);
+	query.bindValue(":format", format);
 	query.bindValue(":size", size);
 	query.bindValue(":resolution", resolution);
 	query.bindValue(":importedAt", importedAt);
@@ -137,39 +137,39 @@ int DatabaseManager::selectLastAccessedAlbumID()
 
 }
 
-QSqlQuery DatabaseManager::selectImagesWithAlbumID(int albumID, int orderType)
+QSqlQuery DatabaseManager::selectImagesWithAlbumID(int albumID, int sortType)
 {
 	QSqlQuery query;
-	query.prepare("SELECT * FROM Images ORDER BY :orderType");
-	switch (orderType)
+	query.prepare("SELECT * FROM Images ORDER BY :sortType");
+	switch (sortType)
 	{
 	case 0:
-		query.bindValue(":orderType", "LastAccessed");
+		query.bindValue(":sortType", "LastAccessed");
 		break;
 	case 1:
-		query.bindValue(":orderType", "ImportedAt");
+		query.bindValue(":sortType", "ImportedAt");
 		break;
 	default:
-		query.bindValue(":orderType", "ID");
+		query.bindValue(":sortType", "ID");
 	}
 	query.exec();
 	return query;
 }
 
-QSqlQuery DatabaseManager::selectAllAlbums(int orderType)
+QSqlQuery DatabaseManager::selectAllAlbums(int sortType)
 {
 	QSqlQuery query;
-	query.prepare("SELECT * FROM Albums ORDER BY :orderType");
-	switch (orderType)
+	query.prepare("SELECT * FROM Albums ORDER BY :sortType");
+	switch (sortType)
 	{
 	case 0:
-		query.bindValue(":orderType", "LastAccessed");
+		query.bindValue(":sortType", "LastAccessed");
 		break;
 	case 1:
-		query.bindValue(":orderType", "CreatedAt");
+		query.bindValue(":sortType", "CreatedAt");
 		break;
 	default:
-		query.bindValue(":orderType", "ID");
+		query.bindValue(":sortType", "ID");
 	}
 	query.exec();
 	return query;
