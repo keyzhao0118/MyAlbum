@@ -15,7 +15,7 @@ CustomImage::CustomImage(ViewSize viewSize, const QPixmap& pixmap, QWidget* pare
 		size = QSize(150, 150);
 		break;
 	case ViewSize::Small:
-		size = QSize(100, 100);
+		size = QSize(100, 100); 
 		break;
 	default:
 		size = QSize(100, 100);

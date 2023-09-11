@@ -12,6 +12,6 @@ public:
 	~ImageScrollWidget();
 
 public slots:
-	void refresh(QSqlQuery& query);
+	void refresh(QSqlQuery& query, int view, int sort);
 
 };

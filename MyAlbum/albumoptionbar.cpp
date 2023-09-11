@@ -24,7 +24,14 @@ AlbumOptionBar::AlbumOptionBar(QWidget *parent)
 	hLayout->addWidget(m_sortComboBox);
 	
 	setLayout(hLayout);
+
+	connect(m_sortComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(sortChanged(int)));
 }
 
 AlbumOptionBar::~AlbumOptionBar()
 {}
+
+void AlbumOptionBar::setConfig(int sort)
+{
+	m_sortComboBox->setCurrentIndex(sort);
+}

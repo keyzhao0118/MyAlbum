@@ -12,6 +12,11 @@ public:
 	AlbumOptionBar(QWidget *parent = nullptr);
 	~AlbumOptionBar();
 
+	void setConfig(int sort);
+
+signals:
+	void sortChanged(int);
+
 private:
 	QPushButton* m_oneClickDeleteBtn;
 	QPushButton* m_selectAllBtn;

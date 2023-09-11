@@ -33,12 +33,25 @@ PreviewScene::PreviewScene(QWidget* parent)
 		return;
 	}
 
-	QSqlQuery albumQuery = m_selectAllAlbumsFunc(0);//默认排序类型应该通过配置中心管理
+	//ToDo：从数据库的配置文件中读取配置，设定初始选项：图片格式、图片排序方式、图片视图尺寸、相册排序方式
+	int imageFormat = 0;
+	int imageSortType = 0;
+	int imageView = 0;
+	int albumSortType = 0;
+
+	//根据配置读取结果设置下拉框选项，注意先不要连接信号，初始化时设置下拉框避免画面更新。
+	ui.imageOptionBar->setConfig(imageFormat, imageSortType, imageView);
+	ui.albumOptionBar->setConfig(albumSortType);
+	
+
+
+
+	QSqlQuery albumQuery = m_selectAllAlbumsFunc(imageSortType);
 	ui.albumScrollWidget->refresh(albumQuery);
 
 	int albumID = m_selectLastAccessedAlbumIDFunc();
 	QSqlQuery imageQuery = m_selectImagesWithAlbumIDFunc(albumID, 0);
-	ui.imageScrollWidget->refresh(imageQuery);
+	ui.imageScrollWidget->refresh(imageQuery, 0, 0);
 }
 
 PreviewScene::~PreviewScene()
