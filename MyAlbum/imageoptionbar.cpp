@@ -82,6 +82,21 @@ void ImageOptionBar::setConfig(int sort, int format, int view)
 	m_viewComboBox->setCurrentIndex(view);
 }
 
+int ImageOptionBar::curFormat()const
+{
+	return m_formatComboBox->currentIndex();
+}
+
+int ImageOptionBar::curSortType()const
+{
+	return m_sortComboBox->currentIndex();
+}
+
+int ImageOptionBar::curView()const
+{
+	return m_viewComboBox->currentIndex();
+}
+
 void ImageOptionBar::setAlbumNameBtnClicked()
 {
 	m_albumNameEdit->setReadOnly(false);

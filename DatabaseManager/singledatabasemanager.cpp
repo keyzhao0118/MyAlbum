@@ -137,10 +137,30 @@ int DatabaseManager::selectLastAccessedAlbumID()
 
 }
 
-QSqlQuery DatabaseManager::selectImagesWithAlbumID(int albumID, int sortType)
+QSqlQuery DatabaseManager::selectImagesWithAlbumID(int albumID, int format, int sortType)
 {
 	QSqlQuery query;
-	query.prepare("SELECT * FROM Images ORDER BY :sortType");
+	switch (format)
+	{
+	case 0:
+		query.prepare("SELECT * FROM Images ORDER BY :sortType");
+		break;
+	case 1:
+		query.prepare("SELECT * FROM Images WHERE Format = 'JPG' ORDER BY :sortType");
+		break;
+	case 2:
+		query.prepare("SELECT * FROM Images WHERE Format = 'PNG' ORDER BY :sortType");
+		break;
+	case 3:
+		query.prepare("SELECT * FROM Images WHERE Format = 'GIF' ORDER BY :sortType");
+		break;
+	case 4:
+		query.prepare("SELECT * FROM Images WHERE Format NOT IN ('JPG','PNG','GIF') ORDER BY :sortType");
+		break;
+	default:
+		query.prepare("SELECT * FROM Images ORDER BY :sortType");
+	}
+	
 	switch (sortType)
 	{
 	case 0:
@@ -150,8 +170,9 @@ QSqlQuery DatabaseManager::selectImagesWithAlbumID(int albumID, int sortType)
 		query.bindValue(":sortType", "ImportedAt");
 		break;
 	default:
-		query.bindValue(":sortType", "ID");
+		query.bindValue(":sortType", "LastAccessed");
 	}
+
 	query.exec();
 	return query;
 }

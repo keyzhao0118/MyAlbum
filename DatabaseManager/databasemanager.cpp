@@ -38,9 +38,9 @@ int SelectLastAccessedAlbumID()
 	return DatabaseManager::getInstance()->selectLastAccessedAlbumID();
 }
 
-QSqlQuery SelectImagesWithAlbumID(int albumID, int sortType)
+QSqlQuery SelectImagesWithAlbumID(int albumID, int format, int sortType)
 {
-	return DatabaseManager::getInstance()->selectImagesWithAlbumID(albumID, sortType);
+	return DatabaseManager::getInstance()->selectImagesWithAlbumID(albumID, format, sortType);
 }
 
 QSqlQuery SelectAllAlbums(int sortType)

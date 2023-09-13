@@ -32,6 +32,10 @@ public:
 
 	void setConfig(int sort, int format, int view);
 
+	int curFormat()const;
+	int curSortType()const;
+	int curView()const;
+
 signals:
 	void albumNameChanged(const QString&);
 	void albumCoverChanged();

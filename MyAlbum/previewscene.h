@@ -17,7 +17,7 @@ public:
 	typedef bool (*DeleteAlbumFunc)(int);
 	typedef bool (*DeleteImageFunc)(int);
 	typedef int (*SelectLastAccessedAlbumIDFunc)();
-	typedef QSqlQuery (*SelectImagesWithAlbumIDFunc)(int, int);
+	typedef QSqlQuery (*SelectImagesWithAlbumIDFunc)(int, int, int);
 	typedef QSqlQuery (*SelectAllAlbumsFunc)(int);
 
 	PreviewScene(QWidget *parent = nullptr);
@@ -26,6 +26,8 @@ public:
 private slots:
 	void onSettingsBtnClicked();
 	void onMaxBtnClicked(bool isMax);
+
+	void refreshImage();
 
 private:
 	Ui::PreviewSceneClass ui;

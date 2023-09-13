@@ -8,10 +8,7 @@ class ImageScrollWidget : public QWidget
 	Q_OBJECT
 
 public:
-	ImageScrollWidget(QWidget *parent = nullptr);
+	ImageScrollWidget(QSqlQuery& query, int view, QWidget* parent = nullptr);
 	~ImageScrollWidget();
-
-public slots:
-	void refresh(QSqlQuery& query, int view, int sort);
 
 };

@@ -4,19 +4,9 @@
 #include <QVBoxLayout>
 #include "customimage.h"
 
-ImageScrollWidget::ImageScrollWidget(QWidget *parent)
+ImageScrollWidget::ImageScrollWidget(QSqlQuery& query, int view, QWidget* parent)
 	: QWidget(parent)
 {	
-	
-}
-
-ImageScrollWidget::~ImageScrollWidget()
-{
-
-}
-
-void ImageScrollWidget::refresh(QSqlQuery& query, int view, int sort)
-{
 	QVBoxLayout* vLayout = new QVBoxLayout;
 	while (query.next())
 	{
@@ -33,4 +23,9 @@ void ImageScrollWidget::refresh(QSqlQuery& query, int view, int sort)
 		vLayout->addWidget(customImage);
 	}
 	setLayout(vLayout);
+}
+
+ImageScrollWidget::~ImageScrollWidget()
+{
+
 }

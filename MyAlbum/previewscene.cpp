@@ -2,6 +2,7 @@
 #include <QDir>
 #include <QLibrary>
 #include <QMessageBox>
+#include "imagescrollwidget.h"
 
 PreviewScene::PreviewScene(QWidget* parent)
 	: QWidget(parent)
@@ -42,16 +43,14 @@ PreviewScene::PreviewScene(QWidget* parent)
 	//根据配置读取结果设置下拉框选项，注意先不要连接信号，初始化时设置下拉框避免画面更新。
 	ui.imageOptionBar->setConfig(imageFormat, imageSortType, imageView);
 	ui.albumOptionBar->setConfig(albumSortType);
-	
+
+	refreshImage();
+
+	connect(ui.imageOptionBar, SIGNAL(formatChanged(int)), this, SLOT(refreshImage()));
 
 
-
-	QSqlQuery albumQuery = m_selectAllAlbumsFunc(imageSortType);
-	ui.albumScrollWidget->refresh(albumQuery);
-
-	int albumID = m_selectLastAccessedAlbumIDFunc();
-	QSqlQuery imageQuery = m_selectImagesWithAlbumIDFunc(albumID, 0);
-	ui.imageScrollWidget->refresh(imageQuery, 0, 0);
+	/*QSqlQuery albumQuery = m_selectAllAlbumsFunc(imageSortType);
+	ui.albumScrollWidget->refresh(albumQuery);*/
 }
 
 PreviewScene::~PreviewScene()
@@ -62,7 +61,7 @@ PreviewScene::~PreviewScene()
 
 void PreviewScene::onSettingsBtnClicked()
 {
-
+	
 }
 
 void PreviewScene::onMaxBtnClicked(bool isMax)
@@ -74,6 +73,17 @@ void PreviewScene::onMaxBtnClicked(bool isMax)
 		m_rect = geometry();
 		showMaximized();
 	}
+}
+
+void PreviewScene::refreshImage()
+{
+	int albumID = m_selectLastAccessedAlbumIDFunc();
+	int format = ui.imageOptionBar->curFormat();
+	int sortType = ui.imageOptionBar->curSortType();
+	int view = ui.imageOptionBar->curView();
+	QSqlQuery imageQuery = m_selectImagesWithAlbumIDFunc(albumID, format, sortType);
+	ImageScrollWidget* widget = new ImageScrollWidget(imageQuery, view, this);
+	ui.imagescrollArea->setWidget(widget);
 }
 
 bool PreviewScene::loadLibrary()
