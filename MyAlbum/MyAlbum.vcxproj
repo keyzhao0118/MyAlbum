@@ -85,11 +85,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="previewscene.qrc" />
-    <QtUic Include="customimage.ui" />
     <QtUic Include="customtitle.ui" />
     <QtUic Include="previewscene.ui" />
     <QtMoc Include="previewscene.h" />
     <ClCompile Include="albumscrollwidget.cpp" />
+    <ClCompile Include="customalbum.cpp" />
     <ClCompile Include="customimage.cpp" />
     <ClCompile Include="imageoptionbar.cpp" />
     <ClCompile Include="closebutton.cpp" />
@@ -107,6 +107,7 @@
     <QtMoc Include="albumscrollwidget.h" />
     <QtMoc Include="imagescrollwidget.h" />
     <QtMoc Include="customimage.h" />
+    <QtMoc Include="customalbum.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

@@ -8,9 +8,6 @@ class AlbumScrollWidget : public QWidget
 	Q_OBJECT
 
 public:
-	AlbumScrollWidget(QWidget* parent = nullptr);
+	AlbumScrollWidget(QSqlQuery& query, int sortType, QWidget* parent = nullptr);
 	~AlbumScrollWidget();
-
-public slots:
-	void refresh(QSqlQuery& query);
 };

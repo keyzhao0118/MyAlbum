@@ -8,7 +8,7 @@ class ImageScrollWidget : public QWidget
 	Q_OBJECT
 
 public:
-	ImageScrollWidget(QSqlQuery& query, int view, QWidget* parent = nullptr);
+	ImageScrollWidget(QSqlQuery& query, int sortType, int view, QWidget* parent = nullptr);
 	~ImageScrollWidget();
 
 };

@@ -4,7 +4,6 @@
 CustomImage::CustomImage(ViewSize viewSize, const QPixmap& pixmap, QWidget* parent)
 	: QWidget(parent), m_pixmap(pixmap)
 {
-	ui.setupUi(this);
 	QSize size;
 	switch (viewSize)
 	{

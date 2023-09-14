@@ -51,7 +51,14 @@
        <number>3</number>
       </property>
       <item>
-       <widget class="ImageOptionBar" name="imageOptionBar" native="true"/>
+       <widget class="ImageOptionBar" name="imageOptionBar" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QScrollArea" name="imagescrollArea">
@@ -104,7 +111,14 @@
        <number>3</number>
       </property>
       <item>
-       <widget class="AlbumOptionBar" name="albumOptionBar" native="true"/>
+       <widget class="AlbumOptionBar" name="albumOptionBar" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QScrollArea" name="albumscrollArea">
@@ -123,7 +137,7 @@
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
-        <widget class="AlbumScrollWidget" name="albumScrollWidget">
+        <widget class="QWidget" name="albumScrollWidget">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -158,12 +172,6 @@
    <class>ImageOptionBar</class>
    <extends>QWidget</extends>
    <header>imageoptionbar.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>AlbumScrollWidget</class>
-   <extends>QWidget</extends>
-   <header>albumscrollwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

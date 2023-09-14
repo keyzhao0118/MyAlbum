@@ -1,13 +1,12 @@
 ﻿#pragma once
 
 #include <QWidget>
-#include "ui_customimage.h"
 
 enum class ViewSize
 {
-	Large,
+	Small,
 	Medium,
-	Small
+	Large
 };
 
 class CustomImage : public QWidget
@@ -21,6 +20,5 @@ public:
 	void paintEvent(QPaintEvent* event) override;
 
 private:
-	Ui::CustomImageClass ui;
 	QPixmap m_pixmap;
 };

@@ -25,7 +25,9 @@ AlbumOptionBar::AlbumOptionBar(QWidget *parent)
 	
 	setLayout(hLayout);
 
-	connect(m_sortComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(sortChanged(int)));
+	connect(m_sortComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(sortChanged()));
+	connect(m_oneClickDeleteBtn, SIGNAL(clicked()), this, SIGNAL(deleteAlbums()));
+	connect(m_selectAllBtn, SIGNAL(clicked()), this, SIGNAL(selectAll()));
 }
 
 AlbumOptionBar::~AlbumOptionBar()
@@ -34,4 +36,19 @@ AlbumOptionBar::~AlbumOptionBar()
 void AlbumOptionBar::setConfig(int sort)
 {
 	m_sortComboBox->setCurrentIndex(sort);
+}
+
+int AlbumOptionBar::curSortType() const
+{
+	return m_sortComboBox->currentIndex();
+}
+
+int AlbumOptionBar::activeAlbumID() const
+{
+	return m_activeAlbumID;
+}
+
+void AlbumOptionBar::setActiveAlbumID(int albumID)
+{
+	m_activeAlbumID = albumID;
 }

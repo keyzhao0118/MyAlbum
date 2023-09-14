@@ -57,6 +57,9 @@
     <ClCompile Include="customimage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="customalbum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -85,12 +88,12 @@
     <QtMoc Include="customimage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="customalbum.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="customtitle.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtUic Include="customimage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

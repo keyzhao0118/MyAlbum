@@ -13,12 +13,19 @@ public:
 	~AlbumOptionBar();
 
 	void setConfig(int sort);
+	int curSortType()const;
+	int activeAlbumID()const;
+	void setActiveAlbumID(int albumID);
 
 signals:
-	void sortChanged(int);
+	void sortChanged();
+	void deleteAlbums();
+	void selectAll();
 
 private:
 	QPushButton* m_oneClickDeleteBtn;
 	QPushButton* m_selectAllBtn;
 	QComboBox* m_sortComboBox;
+
+	int m_activeAlbumID;
 };

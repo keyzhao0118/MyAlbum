@@ -27,6 +27,7 @@ private slots:
 	void onSettingsBtnClicked();
 	void onMaxBtnClicked(bool isMax);
 
+	void refreshAlbum();
 	void refreshImage();
 
 private:

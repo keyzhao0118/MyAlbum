@@ -32,19 +32,20 @@ public:
 
 	void setConfig(int sort, int format, int view);
 
+	QString curAlbumName()const;
 	int curFormat()const;
 	int curSortType()const;
 	int curView()const;
 
 signals:
-	void albumNameChanged(const QString&);
+	void albumNameChanged();
 	void albumCoverChanged();
 	void importImages();
 	void deleteImages();
 	void selectAll();
-	void formatChanged(int);
-	void sortChanged(int);
-	void viewChanged(int);
+	void formatChanged();
+	void sortChanged();
+	void viewChanged();
 
 
 public slots:

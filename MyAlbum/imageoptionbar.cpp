@@ -60,16 +60,16 @@ ImageOptionBar::ImageOptionBar(QWidget *parent)
 	connect(m_albumNameEdit, SIGNAL(returnPressed()), this, SLOT(changeAlbumName()));
 	
 	connect(m_albumNameEdit, SIGNAL(textChanged(const QString&)), this, 
-		SIGNAL(albumNameChanged(const QString&)));
+		SIGNAL(albumNameChanged()));
 
 	connect(m_setAlbumCoverBtn, SIGNAL(clicked()), this, SIGNAL(albumCoverChanged()));
 	connect(m_importImageBtn, SIGNAL(clicked()), this, SIGNAL(importImages()));
 	connect(m_oneClickDeleteBtn, SIGNAL(clicked()), this, SIGNAL(deleteImages()));
 	connect(m_selectAllBtn, SIGNAL(clicked()), this, SIGNAL(selectAll()));
 
-	connect(m_formatComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(formatChanged(int)));
-	connect(m_sortComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(sortChanged(int)));
-	connect(m_viewComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(viewChanged(int)));
+	connect(m_formatComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(formatChanged()));
+	connect(m_sortComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(sortChanged()));
+	connect(m_viewComboBox, SIGNAL(currentIndexChanged(int)), this, SIGNAL(viewChanged()));
 }
 
 ImageOptionBar::~ImageOptionBar()
@@ -80,6 +80,11 @@ void ImageOptionBar::setConfig(int sort, int format, int view)
 	m_sortComboBox->setCurrentIndex(sort);
 	m_formatComboBox->setCurrentIndex(format);
 	m_viewComboBox->setCurrentIndex(view);
+}
+
+QString ImageOptionBar::curAlbumName() const
+{
+	return m_albumNameEdit->text();
 }
 
 int ImageOptionBar::curFormat()const

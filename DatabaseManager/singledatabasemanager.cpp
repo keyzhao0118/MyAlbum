@@ -9,10 +9,9 @@ namespace
 QString createAlbumsTableSQL = "CREATE TABLE IF NOT EXISTS Albums ("
 	"ID INTEGER PRIMARY KEY,"
 	"Name TEXT UNIQUE,"
-	"CoverID INTEGER NULL,"
+	"CoverPath TEXT,"
 	"LastAccessed DATETIME,"
-	"CreatedAt DATETIME,"
-	"FOREIGN KEY(CoverID) REFERENCES Images(ID)"
+	"CreatedAt DATETIME"
 	");";
 
 QString createImagesTableSQL = "CREATE TABLE IF NOT EXISTS Images ("
@@ -27,8 +26,8 @@ QString createImagesTableSQL = "CREATE TABLE IF NOT EXISTS Images ("
 	"FOREIGN KEY(AlbumID) REFERENCES Albums(ID) ON DELETE CASCADE"
 	");";
 
-QString insertAlbumSQL = "INSERT INTO Albums (Name, LastAccessed, CreatedAt) "
-	"VALUES (:name, :lastAccessed, :createdAt)";
+QString insertAlbumSQL = "INSERT INTO Albums (Name, CoverPath, LastAccessed, CreatedAt) "
+	"VALUES (:name, :coverPath, :lastAccessed, :createdAt)";
 
 QString insertImageSQL = "INSERT INTO Images (AlbumID, Path, Format, Size, Resolution, LastAccessed, ImportedAt) "
 	"VALUES (:albumID, :path, :format, :size, :resolution, :lastAccessed, :importedAt)";
@@ -88,6 +87,7 @@ int DatabaseManager::insertAlbum(const QString& name, const QDateTime& lastAcces
 	QSqlQuery query;
 	query.prepare(insertAlbumSQL);
 	query.bindValue(":name", name);
+	query.bindValue(":coverPath", "");
 	query.bindValue(":lastAccessed", lastAccessed);
 	query.bindValue(":createdAt", createdAt);
 	if (!query.exec())
@@ -166,7 +166,7 @@ QSqlQuery DatabaseManager::selectImagesWithAlbumID(int albumID, int format, int 
 	case 0:
 		query.bindValue(":sortType", "LastAccessed");
 		break;
-	case 1:
+	case 2:
 		query.bindValue(":sortType", "ImportedAt");
 		break;
 	default:

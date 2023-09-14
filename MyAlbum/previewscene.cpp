@@ -3,24 +3,17 @@
 #include <QLibrary>
 #include <QMessageBox>
 #include "imagescrollwidget.h"
+#include "albumscrollwidget.h"
 
 PreviewScene::PreviewScene(QWidget* parent)
 	: QWidget(parent)
 {
 	ui.setupUi(this);
-	ui.albumscrollArea->setFixedHeight(150);
-
 	//自定义标题栏上的信号处理
 	connect(ui.customTitle, SIGNAL(settingsBtnClicked()), this, SLOT(onSettingsBtnClicked()));
 	connect(ui.customTitle, SIGNAL(minBtnClicked()), this, SLOT(showMinimized()));
 	connect(ui.customTitle, SIGNAL(maxBtnClicked(bool)), this, SLOT(onMaxBtnClicked(bool)));
 	connect(ui.customTitle, SIGNAL(closeBtnClicked()), this, SLOT(close()));
-
-	//ToDo：图片选项卡上的信号处理
-	
-	//ToDo：图片显示窗口的信号处理
-
-	//ToDo
 
 	if (!loadLibrary())
 	{
@@ -44,13 +37,24 @@ PreviewScene::PreviewScene(QWidget* parent)
 	ui.imageOptionBar->setConfig(imageFormat, imageSortType, imageView);
 	ui.albumOptionBar->setConfig(albumSortType);
 
+	refreshAlbum();
 	refreshImage();
 
-	connect(ui.imageOptionBar, SIGNAL(formatChanged(int)), this, SLOT(refreshImage()));
+	connect(ui.imageOptionBar, SIGNAL(formatChanged()), this, SLOT(refreshImage()));
+	connect(ui.imageOptionBar, SIGNAL(sortChanged()), this, SLOT(refreshImage()));
+	connect(ui.imageOptionBar, SIGNAL(viewChanged()), this, SLOT(refreshImage()));
+	//ToDo：待处理的信号
+	//void albumNameChanged();
+	//void albumCoverChanged();
+	//void importImages();
+	//void deleteImages();
+	//void selectAll();
 
-
-	/*QSqlQuery albumQuery = m_selectAllAlbumsFunc(imageSortType);
-	ui.albumScrollWidget->refresh(albumQuery);*/
+	connect(ui.albumOptionBar, SIGNAL(sortChanged()), this, SLOT(refreshAlbum()));
+	//ToDo：待处理的信号
+	//void deleteAlbums();
+	//void selectAll();
+	
 }
 
 PreviewScene::~PreviewScene()
@@ -75,14 +79,22 @@ void PreviewScene::onMaxBtnClicked(bool isMax)
 	}
 }
 
+void PreviewScene::refreshAlbum()
+{
+	int sortType = ui.albumOptionBar->curSortType();
+	QSqlQuery albumQuery = m_selectAllAlbumsFunc(sortType);
+	AlbumScrollWidget* widget = new AlbumScrollWidget(albumQuery, sortType, this);
+	ui.albumscrollArea->setWidget(widget);
+}
+
 void PreviewScene::refreshImage()
 {
-	int albumID = m_selectLastAccessedAlbumIDFunc();
+	int albumID = ui.albumOptionBar->activeAlbumID();
 	int format = ui.imageOptionBar->curFormat();
 	int sortType = ui.imageOptionBar->curSortType();
 	int view = ui.imageOptionBar->curView();
 	QSqlQuery imageQuery = m_selectImagesWithAlbumIDFunc(albumID, format, sortType);
-	ImageScrollWidget* widget = new ImageScrollWidget(imageQuery, view, this);
+	ImageScrollWidget* widget = new ImageScrollWidget(imageQuery, sortType, view, this);
 	ui.imagescrollArea->setWidget(widget);
 }
 
